@@ -22,7 +22,7 @@ class Website(WebsiteBase):
     updated_at: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class UserBase(BaseModel):
     name: str
@@ -43,7 +43,7 @@ class User(UserBase):
     updated_at: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class PostBase(BaseModel):
@@ -66,4 +66,4 @@ class Post(PostBase):
     updated_at: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True

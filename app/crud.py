@@ -1,6 +1,6 @@
 from sqlalchemy import select
 from sqlalchemy.orm import Session
-import models, schemas
+from . import models, schemas
 from sqlalchemy.orm.exc import NoResultFound
 
 

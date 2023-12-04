@@ -1,7 +1,7 @@
 from datetime import datetime
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import mapped_column, relationship, Mapped
-from database import Base
+from .database import Base
 
 
 class Post(Base):
