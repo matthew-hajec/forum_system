@@ -45,7 +45,7 @@ def delete_website(session: Session, website_id: int) -> None:
 # USER CRUD
 # ======================
 def create_user(session: Session, user: schemas.UserCreate) -> models.User:
-    user = models.User(**user.dict())
+    user = models.User(**user.model_dump())
     session.add(user)
     session.commit()
     session.refresh(user)
@@ -64,7 +64,7 @@ def get_user(session: Session, user_id: int) -> models.User:
 def update_user(session: Session, user_id: int, user: schemas.UserUpdate) -> models.User:
     stmt = select(models.User).where(models.User.id == user_id)
     result = session.execute(stmt).scalar_one()
-    for key, value in user.dict(exclude_unset=True).items():
+    for key, value in user.model_dump(exclude_unset=True).items():
         setattr(result, key, value)
     session.commit()
     session.refresh(result)
@@ -82,7 +82,7 @@ def delete_user(session: Session, user_id: int) -> None:
 # POST CRUD
 # ======================
 def create_post(session: Session, post: schemas.PostCreate) -> models.Post:
-    post = models.Post(**post.dict())
+    post = models.Post(**post.model_dump())
     session.add(post)
     session.commit()
     session.refresh(post)
@@ -101,7 +101,7 @@ def get_post(session: Session, post_id: int) -> models.Post:
 def update_post(session: Session, post_id: int, post: schemas.PostUpdate) -> models.Post:
     stmt = select(models.Post).where(models.Post.id == post_id)
     result = session.execute(stmt).scalar_one()
-    for key, value in post.dict(exclude_unset=True).items():
+    for key, value in post.model_dump(exclude_unset=True).items():
         setattr(result, key, value)
     session.commit()
     session.refresh(result)
