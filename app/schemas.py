@@ -2,6 +2,16 @@ from datetime import datetime
 from pydantic import BaseModel
 
 
+class DBModelMixin:
+    id: int
+    created_at: datetime
+    updated_at: datetime
+
+    class Config:
+        orm_mode = True
+        from_attributes = True
+
+
 class WebsiteBase(BaseModel):
     name: str
     domains: str
@@ -15,13 +25,8 @@ class WebsiteUpdate(WebsiteBase):
     pass
 
 
-class Website(WebsiteBase):
-    id: int
-    created_at: datetime
-    updated_at: datetime
-
-    class Config:
-        from_attributes = True
+class Website(WebsiteBase, DBModelMixin):
+    pass
 
 class UserBase(BaseModel):
     name: str
@@ -36,18 +41,12 @@ class UserUpdate(UserBase):
     pass
 
 
-class User(UserBase):
-    id: int
-    created_at: datetime
-    updated_at: datetime
-
-    class Config:
-        from_attributes = True
+class User(UserBase, DBModelMixin):
+    pass
 
 
 class PostBase(BaseModel):
     title: str
-    posted_at: datetime
     content: str
     user_id: int
 
@@ -60,10 +59,5 @@ class PostUpdate(PostBase):
     pass
 
 
-class Post(PostBase):
-    id: int
-    created_at: datetime
-    updated_at: datetime
-
-    class Config:
-        from_attributes = True
+class Post(PostBase, DBModelMixin):
+    pass
