@@ -1,6 +1,8 @@
 import os
+from datetime import datetime
 from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, DeclarativeBase
+from sqlalchemy.orm import sessionmaker, DeclarativeBase, mapped_column, Mapped
+
 
 # Database Connection
 if 'DATABASE_URL' not in os.environ:
@@ -9,5 +11,7 @@ if 'DATABASE_URL' not in os.environ:
 engine = create_engine(os.environ['DATABASE_URL'])
 SessionLocal = sessionmaker(engine)
 
+
 class Base(DeclarativeBase):
-    pass
+    created_at: Mapped[datetime] = mapped_column(default=datetime.now)
+    updated_at: Mapped[datetime] = mapped_column(default=datetime.now, onupdate=datetime.now)
