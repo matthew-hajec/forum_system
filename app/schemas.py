@@ -4,8 +4,7 @@ from pydantic import BaseModel
 
 class WebsiteBase(BaseModel):
     name: str
-    domain: str
-    description: str
+    domains: str
 
 
 class WebsiteCreate(WebsiteBase):
@@ -48,6 +47,7 @@ class User(UserBase):
 
 class PostBase(BaseModel):
     title: str
+    posted_at: datetime
     content: str
     user_id: int
 
